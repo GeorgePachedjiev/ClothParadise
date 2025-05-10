@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакти - ClothParadise</title>
+    <style>
+        /* General reset for margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and overall font styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensures the footer is pushed to the bottom */
+        }
+
+        /* Header Section */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .header-container {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #4CAF50;
+        }
+
+        /* Contact Section */
+        #contact {
+            width: 80%;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        #contact h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+            width: 100%;
+        }
+
+        #contact p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .form-container {
+            width: 48%; /* Form takes up 48% of the container */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        form label {
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        form input,
+        form textarea {
+            padding: 10px;
+            font-size: 1.1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        .image-container {
+            width: 40%; /* Image takes up 48% of the container */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+    width: 100%;
+    max-width: 500px; /* Limiting the image width */
+    border-radius: 8px;
+    transform: translateY(-40px); /* Move the image 10px upwards */
+    }
+
+
+        /* Footer Section */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: auto; /* Ensures footer sticks at the bottom */
+        }
+
+        footer p {
+            font-size: 1em;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            #contact {
+                width: 90%;
+            }
+
+            #contact h2 {
+                font-size: 2em;
+            }
+
+            #contact p {
+                font-size: 1.1em;
+            }
+
+            .form-container,
+            .image-container {
+                width: 100%; /* On small screens, make the form and image full width */
+            }
+
+            form button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>ClothParadise</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Начало</a></li>
+                    <li><a href="about.html">За нас</a></li>
+                    <li><a href="products.html">Продукти</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section id="contact">
+        <h2>Контакти</h2>
+        <p>Свържете се с нас чрез формата по-долу:</p>
+        
+        <div class="form-container">
+            <form>
+                <label for="name">Име:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Имейл:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Съобщение:</label>
+                <textarea id="message" name="message" required></textarea>
+                
+                <button type="submit">Изпрати</button>
+            </form>
+        </div>
+
+        <div class="image-container">
+            <img src="img/22.jpg" alt="Contact Image">
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 ClothParadise. Всички права запазени.</p>
+    </footer>
+
+</body>
+</html>
