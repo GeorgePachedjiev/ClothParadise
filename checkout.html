@@ -1,149 +1,396 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Поръчка</title>
-  <style>
-    /* Фон за цялото тяло на страницата */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f2f2f2; /* Можеш да промениш на друг цвят или изображение */
-      background-image: url('img/23.jpg'); /* Можеш да добавиш изображение */
-      background-size: cover;
-      background-position: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поръчка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Стилове за хедъра */
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-    }
+        /* Фон за цялото тяло на страницата */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            background-image: url('img/23.jpg'); /* Можеш да добавиш изображение */
+            background-size: cover;
+            background-position: center;
+            overflow-x: hidden;
+        }
 
-    header h1 {
-      margin: 0;
-    }
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
 
-    nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-} 
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
 
-nav ul li {
-  display: inline-block; /* вместо inline */
-  margin: 0 15px;
-}
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
+        /* Logo Styles */
+        .logo {
+            position: relative;
+            overflow: hidden;
+        }
 
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-    }
+        .logo h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2d5016, #4a7c59, #6b8e23);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(74, 124, 89, 0.4);
+            margin-bottom: 10px;
+        }
 
-    /* Контейнерът за формата */
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      background-color: rgba(255, 255, 255, 0.8); /* Лек фон, за да личи фона зад */
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+        .logo h1:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
 
-    .container h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
 
-    /* Стилове за формата */
-    form label {
-      display: block;
-      margin-bottom: 5px;
-    }
+        /* Navigation Styles */
+        nav {
+            position: relative;
+        }
 
-    form input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
 
-    form button {
-      width: 100%;
-      padding: 10px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+        nav li {
+            position: relative;
+        }
 
-    form button:hover {
-      background-color: #555;
-    }
-  </style>
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px solid transparent;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.3), rgba(74, 124, 89, 0.3));
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            width: 6px;
+            height: 6px;
+            background: #4a7c59;
+            border-radius: 50%;
+            transform: translateY(-50%) scale(0);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px #4a7c59;
+        }
+
+        nav a:hover::after {
+            right: 10px;
+            transform: translateY(-50%) scale(1);
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            border: 2px solid rgba(74, 124, 89, 0.6);
+            transform: translateY(-2px) scale(1.05);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            background: rgba(45, 80, 22, 0.2);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger {
+            width: 25px;
+            height: 3px;
+            background: #ffffff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+            background: #4a7c59;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+            background: #4a7c59;
+        }
+
+        /* Контейнерът за формата */
+        .container {
+            max-width: 600px;
+            margin: 150px auto 50px;
+            background-color: rgba(255, 255, 255, 0.8); /* Лек фон, за да личи фона зад */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Стилове за формата */
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #2d5016, #4a7c59, #6b8e23);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.4);
+            cursor: pointer;
+        }
+
+        form button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(45, 80, 22, 0.6);
+            filter: brightness(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px 20px;
+            }
+
+            .logo h1 {
+                font-size: 2rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            nav ul.active {
+                max-height: 300px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            nav li {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            nav a {
+                display: block;
+                padding: 20px;
+                border-radius: 0;
+            }
+
+            .container {
+                margin: 170px 20px 50px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>ClothParadise</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Начало</a></li>
-        <li><a href="about.html">За нас</a></li>
-        <li><a href="products.html">Продукти</a></li>
-        <li><a href="contact.html">Контакти</a></li>
-      </ul>
-    </nav>
-  </header>
+    <!-- Header Section -->
+    <header id="header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>ClothParadise</h1>
+            </div>
+            <nav>
+                <div class="menu-toggle" id="menuToggle">
+                    <div class="hamburger"></div>
+                    <div class="hamburger"></div>
+                    <div class="hamburger"></div>
+                </div>
+                <ul id="navMenu">
+                    <li><a href="index.html">Начало</a></li>
+                    <li><a href="products.html">Продукти</a></li>
+                    <li><a href="about.html">За нас</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <section class="container">
-    <h2>Попълнете данни за поръчка</h2>
-    <form id="order-form">
-      <label for="name">Име:</label>
-      <input type="text" id="name" name="name" required>
+    <section class="container">
+        <h2>Попълнете данни за поръчка</h2>
+        <form id="order-form">
+            <label for="name">Име:</label>
+            <input type="text" id="name" name="name" required>
 
-      <label for="address">Адрес:</label>
-      <input type="text" id="address" name="address" required>
+            <label for="address">Адрес:</label>
+            <input type="text" id="address" name="address" required>
 
-      <label for="phone">Телефон:</label>
-      <input type="text" id="phone" name="phone" required>
+            <label for="phone">Телефон:</label>
+            <input type="text" id="phone" name="phone" required>
 
-      <input type="hidden" name="product" id="product-name">
+            <input type="hidden" name="product" id="product-name">
 
-      <button type="submit">Изпрати поръчка</button>
-    </form>
-  </section>
+            <button type="submit">Изпрати поръчка</button>
+        </form>
+    </section>
 
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    // Инициализиране на EmailJS с твоя публичен ключ
-    (function(){
-      emailjs.init("aibleFmTrROi9VQta"); // Замени с твоя публичен ключ от EmailJS
-    })();
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Инициализиране на EmailJS с твоя публичен ключ
+        (function(){
+            emailjs.init("aibleFmTrROi9VQta"); // Замени с твоя публичен ключ от EmailJS
+        })();
 
-    // Извличане на параметъра 'product' от URL-то и попълване на скритото поле
-    const urlParams = new URLSearchParams(window.location.search);
-    const productName = urlParams.get('product');
-    document.getElementById('product-name').value = productName;
+        // Извличане на параметъра 'product' от URL-то и попълване на скритото поле
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get('product');
+        document.getElementById('product-name').value = productName;
 
-    // Обработка на изпращането на формата
-    document.getElementById('order-form').addEventListener('submit', function(event) {
-      event.preventDefault();
+        // Обработка на изпращането на формата
+        document.getElementById('order-form').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-      emailjs.sendForm('service_nv5baqo', 'template_t8ftdyi', this)
-        .then(function() {
-          alert('Поръчката беше изпратена успешно!');
-        }, function(error) {
-          alert('Възникна грешка при изпращането на поръчката: ' + JSON.stringify(error));
+            emailjs.sendForm('service_nv5baqo', 'template_t8ftdyi', this)
+                .then(function() {
+                    alert('Поръчката беше изпратена успешно!');
+                }, function(error) {
+                    alert('Възникна грешка при изпращането на поръчката: ' + JSON.stringify(error));
+                });
         });
-    });
-  </script>
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Add some interactive particles effect to the logo
+        const logo = document.querySelector('.logo h1');
+        logo.addEventListener('mouseover', function() {
+            this.style.textShadow = '0 0 50px rgba(74, 124, 89, 0.8), 0 0 100px rgba(107, 142, 35, 0.6)';
+        });
+        
+        logo.addEventListener('mouseout', function() {
+            this.style.textShadow = '0 0 30px rgba(74, 124, 89, 0.4)';
+        });
+
+        // Remove smooth scrolling since we're using external links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function() {
+                // Close mobile menu if open
+                if (navMenu.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
