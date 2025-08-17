@@ -269,26 +269,31 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-container {
-                padding: 15px 20px;
-            #home h2 {
-                font-size: 2.5rem;
-            }
-
-            #home p {
-                font-size: 1.1rem;
-            }
-
-            #home {
-                margin: 20px;
-                padding: 30px 20px;
+                padding: 12px 15px;
             }
 
             .logo h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+                letter-spacing: 1.5px;
             }
 
             .menu-toggle {
                 display: flex;
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                z-index: 1002;
+            }
+
+            .hamburger {
+                width: 22px;
+                height: 2.5px;
+                margin: 2.5px 0;
+            }
+
+            nav {
+                width: 100%;
             }
 
             nav ul {
@@ -297,33 +302,123 @@
                 left: 0;
                 width: 100%;
                 flex-direction: column;
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(20px);
+                background: rgba(0, 0, 0, 0.98);
+                backdrop-filter: blur(25px);
                 gap: 0;
                 max-height: 0;
                 overflow: hidden;
-                transition: max-height 0.3s ease;
+                transition: max-height 0.4s ease;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
             }
 
             nav ul.active {
-                max-height: 300px;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                max-height: 280px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             }
 
             nav li {
                 width: 100%;
                 text-align: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+                transform: translateY(-20px);
+                opacity: 0;
+                transition: all 0.3s ease;
             }
+
+            nav ul.active li {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            nav ul.active li:nth-child(1) { transition-delay: 0.1s; }
+            nav ul.active li:nth-child(2) { transition-delay: 0.15s; }
+            nav ul.active li:nth-child(3) { transition-delay: 0.2s; }
+            nav ul.active li:nth-child(4) { transition-delay: 0.25s; }
 
             nav a {
                 display: block;
-                padding: 20px;
+                padding: 18px 20px;
                 border-radius: 0;
+                font-size: 1rem;
+                letter-spacing: 0.8px;
             }
 
-            body {
-                padding-top: 140px;
+            nav a::after {
+                display: none;
+            }
+
+            #home {
+                margin: 15px;
+                padding: 25px 15px;
+                border-radius: 15px;
+            }
+
+            #home h2 {
+                font-size: 2.2rem;
+                margin-bottom: 15px;
+                line-height: 1.2;
+            }
+
+            #home p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+                line-height: 1.4;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 0.9rem;
+                letter-spacing: 0.8px;
+            }
+
+            .main-content {
+                height: 100svh;
+            }
+
+            video {
+                object-position: center center;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 10px 12px;
+            }
+
+            .logo h1 {
+                font-size: 1.6rem;
+                margin-bottom: 6px;
+            }
+
+            .menu-toggle {
+                top: 12px;
+                right: 12px;
+            }
+
+            #home {
+                margin: 10px;
+                padding: 20px 12px;
+            }
+
+            #home h2 {
+                font-size: 1.8rem;
+                margin-bottom: 12px;
+            }
+
+            #home p {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.85rem;
+            }
+
+            nav a {
+                padding: 16px 15px;
+                font-size: 0.95rem;
             }
         }
 
