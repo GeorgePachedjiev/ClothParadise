@@ -4,10 +4,364 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>За нас - ClothParadise</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Logo Styles */
+        .header-container h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2d5016, #4a7c59, #6b8e23);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(74, 124, 89, 0.4);
+            margin-bottom: 10px;
+        }
+
+        .header-container h1:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Navigation Styles */
+        nav {
+            position: relative;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px solid transparent;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.3), rgba(74, 124, 89, 0.3));
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            width: 6px;
+            height: 6px;
+            background: #4a7c59;
+            border-radius: 50%;
+            transform: translateY(-50%) scale(0);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px #4a7c59;
+        }
+
+        nav a:hover::after {
+            right: 10px;
+            transform: translateY(-50%) scale(1);
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            border: 2px solid rgba(74, 124, 89, 0.6);
+            transform: translateY(-2px) scale(1.05);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            background: rgba(45, 80, 22, 0.2);
+        }
+
+        /* About Section - Силно намален размер */
+        #about {
+            margin-top: 140px;
+            padding: 20px 20px; /* Много намалено padding */
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            flex: 0 0 auto;
+        }
+
+        .about-container {
+            max-width: 900px; /* Увеличено от 700px */
+            margin: 0 auto;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px 40px; /* Увеличено хorizontално padding */
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .about-container h2 {
+            font-size: 2rem; /* По-малък заглавен шрифт */
+            margin-bottom: 15px; /* Намалено разстояние */
+            color: #2d5016;
+            font-weight: 700;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px; /* По-малка линия */
+            height: 2px;
+            background: linear-gradient(135deg, #2d5016, #4a7c59, #6b8e23);
+            border-radius: 2px;
+        }
+
+        .about-container p {
+            font-size: 1rem; /* По-малък шрифт */
+            line-height: 1.5;
+            margin-bottom: 15px; /* Намалено разстояние */
+            color: #555;
+            text-align: justify;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .about-container p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Image Section - Още по-малка широчина */
+        #footer-image {
+            width: 60%; /* Още по-малка широчина */
+            max-width: 600px; /* По-малка максимална широчина */
+            margin: 20px auto; /* Центрирано с margin */
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            border: 4px solid #4a7c59; /* Border от всички страни */
+            border-radius: 12px; /* Заоблени ъгли */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        #footer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.3s ease;
+            filter: brightness(0.9) contrast(1.1) saturate(1.1);
+            border-radius: 8px; /* Заоблени ъгли на изображението */
+        }
+
+        #footer-image img:hover {
+            transform: scale(1.02);
+            filter: brightness(1) contrast(1.2) saturate(1.2);
+        }
+
+        /* По-фин overlay за по-добра видимост */
+        #footer-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg, 
+                rgba(45, 80, 22, 0.1), 
+                rgba(74, 124, 89, 0.1), 
+                rgba(107, 142, 35, 0.05)
+            );
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Стилен label върху изображението */
+        #footer-image::after {
+            content: 'ClothParadise Style';
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        #footer-image:hover::after {
+            opacity: 1;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            background: linear-gradient(black);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 1rem;
+            border-top: 3px solid #4a7c59;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px 25px;
+            }
+
+            .header-container h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+
+            #about {
+                margin-top: 150px;
+                padding: 15px 10px; /* Още по-малко padding на мобилни */
+            }
+
+            .about-container {
+                padding: 20px 20px; /* По-малко padding */
+                margin: 15px;
+            }
+
+            .about-container h2 {
+                font-size: 1.8rem;
+                margin-bottom: 12px;
+            }
+
+            .about-container p {
+                font-size: 0.95rem;
+                text-align: left;
+                margin-bottom: 12px;
+            }
+
+            #footer-image {
+                width: 80%; /* По-голяма широчина на мобилни */
+                height: 250px;
+                margin: 15px auto;
+            }
+
+            #footer-image::after {
+                bottom: 15px;
+                right: 15px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header-container {
+                padding: 15px 20px;
+            }
+
+            #about {
+                margin-top: 180px;
+            }
+
+            .about-container p {
+                text-align: center;
+            }
+
+            #footer-image::after {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-
     <!-- Header Section -->
     <header>
         <div class="header-container">
@@ -42,5 +396,36 @@
         <p>&copy; 2025 ClothParadise. Всички права запазени.</p>
     </footer>
 
+    <script>
+        // Add interactive effect to the logo
+        const logo = document.querySelector('h1');
+        logo.addEventListener('mouseover', function() {
+            this.style.textShadow = '0 0 50px rgba(74, 124, 89, 0.8), 0 0 100px rgba(107, 142, 35, 0.6)';
+        });
+        
+        logo.addEventListener('mouseout', function() {
+            this.style.textShadow = '0 0 30px rgba(74, 124, 89, 0.4)';
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Add parallax effect to image
+        window.addEventListener('scroll', function() {
+            const image = document.querySelector('#footer-image img');
+            if (image) {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.2;
+                image.style.transform = `translateY(${rate}px)`;
+            }
+        });
+    </script>
 </body>
 </html>
