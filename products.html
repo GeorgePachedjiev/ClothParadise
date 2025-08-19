@@ -220,11 +220,19 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
         .product img {
             width: 100%;
             height: 60%;
             border-radius: 8px;
+            object-fit: cover;
         }
         .product-details {
             margin-top: 15px;
@@ -232,10 +240,12 @@
         .product-details h3 {
             font-size: 22px;
             margin-bottom: 10px;
+            color: #333;
         }
         .product-details p {
             font-size: 18px;
             color: #555;
+            font-weight: 600;
         }
         button {
             background-color: #4CAF50;
@@ -245,19 +255,29 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
         }
         button:hover {
             background-color: #45a049;
+            transform: translateY(-2px);
         }
 
-        /* Responsive Design */
+        /* Responsive Design - ENHANCED MOBILE OPTIMIZATION */
         @media (max-width: 768px) {
+            body {
+                padding-top: 100px;
+            }
+
             .header-container {
-                padding: 15px 20px;
+                padding: 10px 20px;
+                flex-direction: row;
+                justify-content: space-between;
             }
 
             .logo h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 0;
             }
 
             .menu-toggle {
@@ -293,10 +313,119 @@
                 display: block;
                 padding: 20px;
                 border-radius: 0;
+                font-size: 1rem;
             }
 
+            /* Mobile Container Optimization */
+            .container {
+                width: 95%;
+                padding: 20px 0;
+            }
+
+            h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            /* Mobile Grid Optimization */
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+                padding: 0 10px;
+            }
+
+            .product {
+                max-width: none;
+                width: 100%;
+                padding: 20px 15px;
+                margin: 0;
+            }
+
+            .product img {
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .product-details h3 {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+
+            .product-details p {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
             body {
-                padding-top: 140px;
+                padding-top: 90px;
+            }
+
+            .logo h1 {
+                font-size: 1.6rem;
+            }
+
+            .container {
+                width: 100%;
+                padding: 15px 0;
+            }
+
+            h2 {
+                font-size: 22px;
+                padding: 0 15px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 0 15px;
+            }
+
+            .product {
+                padding: 15px;
+            }
+
+            .product img {
+                height: 180px;
+            }
+
+            .product-details h3 {
+                font-size: 18px;
+            }
+
+            .product-details p {
+                font-size: 16px;
+            }
+
+            button {
+                padding: 10px 15px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .logo h1 {
+                font-size: 1.4rem;
+            }
+
+            .product img {
+                height: 160px;
+            }
+
+            .product-details h3 {
+                font-size: 16px;
+            }
+
+            .product-details p {
+                font-size: 15px;
             }
         }
     </style>
@@ -372,7 +501,7 @@
                 <div class="product-details">
                     <h3>Adidas Yeezy Boost 350</h3>
                     <p>Цена: 220лв</p>
-                    <button onclick="window.location.href='checkout.html?product=Louis%20Vuitton%20Тениска'">Купи</button>
+                    <button onclick="window.location.href='checkout.html?product=Adidas%20Yeezy%20Boost%20350'">Купи</button>
                 </div>
             </div>
             <div class="product">
@@ -380,7 +509,7 @@
                 <div class="product-details">
                     <h3>Nike Tech fleece</h3>
                     <p>Цена: 190лв</p>
-                    <button onclick="window.location.href='checkout.html?product=Louis%20Vuitton%20обувки'">Купи</button>
+                    <button onclick="window.location.href='checkout.html?product=Nike%20Tech%20fleece'">Купи</button>
                 </div>
             </div>
             <div class="product">
@@ -388,7 +517,7 @@
                 <div class="product-details">
                     <h3>Saint Laurent токчета</h3>
                     <p>Цена: 180лв</p>
-                    <button onclick="window.location.href='checkout.html?product=Christian%20Loubotin%20обувки'">Купи</button>
+                    <button onclick="window.location.href='checkout.html?product=Saint%20Laurent%20токчета'">Купи</button>
                 </div>
             </div>
             <div class="product">
@@ -396,7 +525,7 @@
                 <div class="product-details">
                     <h3>Balenciaga тениска</h3>
                     <p>Цена: 80лв</p>
-                    <button onclick="window.location.href='checkout.html?product=Balenciaga%20тениска'">Купи</button>
+                    <button onclick="window.location.href='checkout.html?product=Balenciaga%20тениска%202'">Купи</button>
                 </div>
             </div>
         </div>
