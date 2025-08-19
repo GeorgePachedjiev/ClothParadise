@@ -188,29 +188,42 @@
         .container {
             max-width: 600px;
             margin: 150px auto 50px;
-            background-color: rgba(255, 255, 255, 0.8); /* Лек фон, за да личи фона зад */
+            background-color: rgba(255, 255, 255, 0.95); /* По-видим фон */
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
         }
 
         .container h2 {
             text-align: center;
             margin-bottom: 30px;
+            color: #333;
+            font-size: 1.8rem;
         }
 
         /* Стилове за формата */
         form label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
         }
 
         form input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        form input:focus {
+            outline: none;
+            border-color: #4a7c59;
+            box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
         }
 
         form button {
@@ -226,22 +239,36 @@
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(45, 80, 22, 0.4);
             cursor: pointer;
+            font-size: 1.1rem;
         }
 
         form button:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(45, 80, 22, 0.6);
-            filter: brightness(1.2);
+            filter: brightness(1.1);
         }
 
-        /* Responsive Design */
+        form button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ENHANCED MOBILE RESPONSIVE DESIGN */
         @media (max-width: 768px) {
+            body {
+                background-attachment: scroll;
+            }
+
             .header-container {
-                padding: 15px 20px;
+                padding: 10px 20px;
+                flex-direction: row;
+                justify-content: space-between;
             }
 
             .logo h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 0;
             }
 
             .menu-toggle {
@@ -277,10 +304,94 @@
                 display: block;
                 padding: 20px;
                 border-radius: 0;
+                font-size: 1rem;
+            }
+
+            /* Mobile Container Optimization */
+            .container {
+                margin: 120px 20px 30px;
+                padding: 25px 20px;
+                max-width: none;
+            }
+
+            .container h2 {
+                font-size: 1.6rem;
+                margin-bottom: 25px;
+            }
+
+            form label {
+                font-size: 0.95rem;
+                margin-bottom: 6px;
+            }
+
+            form input {
+                padding: 14px 12px;
+                margin-bottom: 18px;
+                font-size: 1rem;
+            }
+
+            form button {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.6rem;
             }
 
             .container {
-                margin: 170px 20px 50px;
+                margin: 100px 15px 20px;
+                padding: 20px 15px;
+                border-radius: 12px;
+            }
+
+            .container h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            form label {
+                font-size: 0.9rem;
+            }
+
+            form input {
+                padding: 12px 10px;
+                margin-bottom: 15px;
+                font-size: 0.95rem;
+                border-radius: 6px;
+            }
+
+            form button {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+                border-radius: 30px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .logo h1 {
+                font-size: 1.4rem;
+            }
+
+            .container {
+                margin: 90px 10px 15px;
+                padding: 15px 12px;
+            }
+
+            .container h2 {
+                font-size: 1.3rem;
+            }
+
+            form input {
+                padding: 10px 8px;
+                font-size: 0.9rem;
+            }
+
+            form button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -312,17 +423,17 @@
         <h2>Попълнете данни за поръчка</h2>
         <form id="order-form">
             <label for="name">Име:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required placeholder="Въведете вашето име">
 
             <label for="address">Адрес:</label>
-            <input type="text" id="address" name="address" required>
+            <input type="text" id="address" name="address" required placeholder="Въведете адрес за доставка">
 
             <label for="phone">Телефон:</label>
-            <input type="text" id="phone" name="phone" required>
+            <input type="tel" id="phone" name="phone" required placeholder="Въведете телефон за контакт">
 
             <input type="hidden" name="product" id="product-name">
 
-            <button type="submit">Изпрати поръчка</button>
+            <button type="submit" id="submit-btn">Изпрати поръчка</button>
         </form>
     </section>
 
@@ -342,12 +453,26 @@
         // Обработка на изпращането на формата
         document.getElementById('order-form').addEventListener('submit', function(event) {
             event.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Изпращане...';
+            submitBtn.disabled = true;
 
             emailjs.sendForm('service_nv5baqo', 'template_t8ftdyi', this)
                 .then(function() {
                     alert('Поръчката беше изпратена успешно!');
+                    // Reset form
+                    document.getElementById('order-form').reset();
                 }, function(error) {
                     alert('Възникна грешка при изпращането на поръчката: ' + JSON.stringify(error));
+                })
+                .finally(function() {
+                    // Reset button
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
                 });
         });
 
@@ -388,6 +513,18 @@
                 if (navMenu.classList.contains('active')) {
                     menuToggle.classList.remove('active');
                     navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Add input validation and better UX
+        const inputs = document.querySelectorAll('input[required]');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#27ae60';
                 }
             });
         });
