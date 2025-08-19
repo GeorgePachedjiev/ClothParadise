@@ -264,10 +264,21 @@
         }
 
         /* Responsive Design - ENHANCED MOBILE OPTIMIZATION */
-        @media (max-width: 768px) {
-            body {
-                padding-top: 100px;
-            }
+       @media (max-width: 768px) {
+        nav ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(20px);
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        display: block; /* за да се държи като падащо меню */
+        transition: max-height 0.4s ease;
+    }
 
             .header-container {
                 padding: 10px 20px;
@@ -299,22 +310,22 @@
             }
 
             nav ul.active {
-                max-height: 300px;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
+        max-height: 500px; /* повече място, за да побере всички линкове */
+        padding: 10px 0;
+    }
             nav li {
-                width: 100%;
-                text-align: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
             nav a {
-                display: block;
-                padding: 20px;
-                border-radius: 0;
-                font-size: 1rem;
-            }
+        display: block;
+        width: 100%;
+        padding: 18px;
+        font-size: 1rem;
+        border-radius: 0;
+    }
 
             /* Mobile Container Optimization */
             .container {
@@ -528,6 +539,43 @@
                     <button onclick="window.location.href='checkout.html?product=Balenciaga%20тениска%202'">Купи</button>
                 </div>
             </div>
+        </div>
+    </section>
+
+<section class="container">
+        <div class="product-grid">
+            <div class="product">
+                <img src="https://media.discordapp.net/attachments/1037779252826886214/1400067491027357696/image.png?ex=68a5a7f5&is=68a45675&hm=af3da59d09bbfc3c6bdf4273105470ac371f378238ac069a27819834ff00555f&=&format=webp&quality=lossless&width=889&height=810" alt="Модерна тениска">
+                <div class="product-details">
+                    <h3>Екип Denim Tears</h3>
+                    <p>Цена: 120лв</p>
+                    <button onclick="window.location.href='checkout.html?product=Adidas%20Yeezy%20Boost%20350'">Купи</button>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://frankfurt.apollo.olxcdn.com/v1/files/x9l92ck14hfs3-BG/image;s=1000x700" alt="Стилна рокля">
+                <div class="product-details">
+                    <h3>Dior B22</h3>
+                    <p>Цена: 230лв</p>
+                    <button onclick="window.location.href='checkout.html?product=Nike%20Tech%20fleece'">Купи</button>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://media.discordapp.net/attachments/1037779252826886214/1353379359540510740/image.png?ex=68a536ff&is=68a3e57f&hm=4a6a52d701b85eb5df7d988caf36c274407bc59f908a9e571add31b23825c787&=&format=webp&quality=lossless&width=669&height=801" alt="Кожено яке">
+                <div class="product-details">
+                    <h3>Christian Loubotin токчета</h3>
+                    <p>Цена: 180лв</p>
+                    <button onclick="window.location.href='checkout.html?product=Saint%20Laurent%20токчета'">Купи</button>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://frankfurt.apollo.olxcdn.com/v1/files/j0tpztmrpxsg3-BG/image;s=1000x700" alt="Дънки">
+                <div class="product-details">
+                    <h3>Gucci обувки</h3>
+                    <p>Цена: 180лв</p>
+                    <button onclick="window.location.href='checkout.html?product=Balenciaga%20тениска%202'">Купи</button>
+                </div>
+            </div>    
         </div>
     </section>
 
