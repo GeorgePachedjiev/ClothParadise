@@ -12,9 +12,12 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: #f4f4f4;
             color: #333;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
         /* Header Styles */
@@ -99,6 +102,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             border: 2px solid transparent;
+            touch-action: manipulation;
         }
 
         nav a::before {
@@ -144,29 +148,89 @@
             background: rgba(45, 80, 22, 0.2);
         }
 
-        /* About Section - Силно намален размер */
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+            touch-action: manipulation;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hamburger {
+            width: 25px;
+            height: 3px;
+            background: #ffffff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+            background: #4a7c59;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .hamburger:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+            background: #4a7c59;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #2d5016, #4a7c59, #6b8e23);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* About Section */
         #about {
             margin-top: 140px;
-            padding: 20px 20px; /* Много намалено padding */
+            padding: 20px 20px;
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             flex: 0 0 auto;
         }
 
         .about-container {
-            max-width: 900px; /* Увеличено от 700px */
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
             background: rgba(255, 255, 255, 0.95);
-            padding: 25px 40px; /* Увеличено хorizontално padding */
+            padding: 25px 40px;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(0, 0, 0, 0.05);
             backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .about-container h2 {
-            font-size: 2rem; /* По-малък заглавен шрифт */
-            margin-bottom: 15px; /* Намалено разстояние */
+            font-size: 2rem;
+            margin-bottom: 15px;
             color: #2d5016;
             font-weight: 700;
             position: relative;
@@ -179,31 +243,37 @@
             bottom: -6px;
             left: 50%;
             transform: translateX(-50%);
-            width: 50px; /* По-малка линия */
+            width: 50px;
             height: 2px;
             background: linear-gradient(135deg, #2d5016, #4a7c59, #6b8e23);
             border-radius: 2px;
         }
 
         .about-container p {
-            font-size: 1rem; /* По-малък шрифт */
-            line-height: 1.5;
-            margin-bottom: 15px; /* Намалено разстояние */
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
             color: #555;
             text-align: justify;
             font-weight: 400;
             letter-spacing: 0.2px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards;
         }
 
         .about-container p:last-of-type {
             margin-bottom: 0;
         }
 
-        /* Image Section - Още по-малка широчина */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Image Section */
         #footer-image {
-            width: 60%; /* Още по-малка широчина */
-            max-width: 600px; /* По-малка максимална широчина */
-            margin: 20px auto; /* Центрирано с margin */
+            width: 60%;
+            max-width: 600px;
+            margin: 20px auto;
             overflow: hidden;
             position: relative;
             height: 300px;
@@ -211,9 +281,15 @@
             align-items: center;
             justify-content: center;
             background: #000;
-            border: 4px solid #4a7c59; /* Border от всички страни */
-            border-radius: 12px; /* Заоблени ъгли */
+            border: 4px solid #4a7c59;
+            border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        #footer-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
         #footer-image img {
@@ -222,7 +298,7 @@
             object-fit: cover;
             transition: transform 0.5s ease, filter 0.3s ease;
             filter: brightness(0.9) contrast(1.1) saturate(1.1);
-            border-radius: 8px; /* Заоблени ъгли на изображението */
+            border-radius: 8px;
         }
 
         #footer-image img:hover {
@@ -230,7 +306,6 @@
             filter: brightness(1) contrast(1.2) saturate(1.2);
         }
 
-        /* По-фин overlay за по-добра видимост */
         #footer-image::before {
             content: '';
             position: absolute;
@@ -248,7 +323,6 @@
             pointer-events: none;
         }
 
-        /* Стилен label върху изображението */
         #footer-image::after {
             content: 'ClothParadise Style';
             position: absolute;
@@ -275,98 +349,288 @@
         }
 
         footer {
-            background: linear-gradient(black);
+            background: linear-gradient(135deg, #1a1a1a, #000);
             color: white;
             text-align: center;
             padding: 25px;
             font-size: 1rem;
             border-top: 3px solid #4a7c59;
+            margin-top: 40px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
+        /* Responsive Design - Mobile First Approach */
+        @media (max-width: 1024px) {
             .header-container {
+                padding: 15px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 0;
+            }
+
+            .header-container {
+                flex-direction: row;
+                justify-content: space-between;
                 padding: 15px 25px;
+                position: relative;
             }
 
             .header-container h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 0;
+                letter-spacing: 1px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.98);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 999;
+            }
+
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
             }
 
             nav ul {
-                gap: 20px;
+                flex-direction: column;
+                gap: 0;
+                padding: 20px 0;
+            }
+
+            nav li {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             }
 
             nav a {
-                font-size: 0.9rem;
-                padding: 10px 15px;
+                display: block;
+                padding: 18px 20px;
+                border-radius: 0;
+                font-size: 1rem;
+                letter-spacing: 0.5px;
+                width: 100%;
+            }
+
+            nav a::after {
+                display: none;
             }
 
             #about {
-                margin-top: 150px;
-                padding: 15px 10px; /* Още по-малко padding на мобилни */
+                margin-top: 90px;
+                padding: 20px 15px;
             }
 
             .about-container {
-                padding: 20px 20px; /* По-малко padding */
+                padding: 25px 20px;
                 margin: 15px;
+                border-radius: 16px;
             }
 
             .about-container h2 {
                 font-size: 1.8rem;
-                margin-bottom: 12px;
+                margin-bottom: 20px;
+            }
+
+            .about-container h2::after {
+                width: 40px;
             }
 
             .about-container p {
-                font-size: 0.95rem;
+                font-size: 1rem;
                 text-align: left;
-                margin-bottom: 12px;
+                margin-bottom: 18px;
+                line-height: 1.7;
             }
 
             #footer-image {
-                width: 80%; /* По-голяма широчина на мобилни */
+                width: 85%;
                 height: 250px;
-                margin: 15px auto;
+                margin: 25px auto;
+                border-radius: 16px;
             }
 
             #footer-image::after {
                 bottom: 15px;
                 right: 15px;
-                padding: 8px 15px;
+                padding: 10px 16px;
                 font-size: 0.9rem;
+                border-radius: 20px;
+            }
+
+            footer {
+                padding: 30px 20px;
+                margin-top: 30px;
             }
         }
 
         @media (max-width: 480px) {
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
+            .header-container {
+                padding: 12px 20px;
             }
 
-            .header-container {
-                padding: 15px 20px;
+            .header-container h1 {
+                font-size: 1.6rem;
             }
 
             #about {
-                margin-top: 180px;
+                margin-top: 80px;
+                padding: 15px 10px;
+            }
+
+            .about-container {
+                padding: 20px 15px;
+                margin: 10px;
+            }
+
+            .about-container h2 {
+                font-size: 1.6rem;
+                margin-bottom: 15px;
             }
 
             .about-container p {
+                font-size: 0.95rem;
                 text-align: center;
+                margin-bottom: 15px;
+                line-height: 1.6;
+            }
+
+            #footer-image {
+                width: 95%;
+                height: 220px;
+                margin: 20px auto;
+                border-width: 3px;
             }
 
             #footer-image::after {
                 display: none;
             }
+
+            footer {
+                padding: 25px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            .header-container h1 {
+                font-size: 1.4rem;
+            }
+
+            .about-container h2 {
+                font-size: 1.4rem;
+            }
+
+            .about-container p {
+                font-size: 0.9rem;
+            }
+
+            #footer-image {
+                height: 200px;
+            }
+        }
+
+        /* Improve touch interactions */
+        @media (hover: none) and (pointer: coarse) {
+            nav a:hover {
+                transform: none;
+                color: #ffffff;
+            }
+            
+            .header-container h1:hover {
+                transform: none;
+            }
+            
+            #footer-image:hover {
+                transform: none;
+            }
+            
+            #footer-image img:hover {
+                transform: none;
+            }
+        }
+
+        /* Dark mode support for mobile */
+        @media (prefers-color-scheme: dark) and (max-width: 768px) {
+            body {
+                background: #1a1a1a;
+            }
+            
+            #about {
+                background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            }
+            
+            .about-container {
+                background: rgba(40, 40, 40, 0.95);
+                color: #fff;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .about-container h2 {
+                color: #4a7c59;
+            }
+            
+            .about-container p {
+                color: #ccc;
+            }
+        }
+
+        /* Loading animation for image */
+        #footer-image img {
+            opacity: 0;
+            animation: imageLoad 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes imageLoad {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Performance optimizations */
+        .about-container,
+        #footer-image {
+            will-change: transform;
         }
     </style>
 </head>
 <body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
     <!-- Header Section -->
-    <header>
+    <header id="header">
         <div class="header-container">
             <h1>ClothParadise</h1>
-            <nav>
+            <div class="menu-toggle" id="menuToggle">
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+            </div>
+            <nav id="navMenu">
                 <ul>
                     <li><a href="index.html">Начало</a></li>
                     <li><a href="products.html">Продукти</a></li>
@@ -397,35 +661,137 @@
     </footer>
 
     <script>
-        // Add interactive effect to the logo
-        const logo = document.querySelector('h1');
-        logo.addEventListener('mouseover', function() {
-            this.style.textShadow = '0 0 50px rgba(74, 124, 89, 0.8), 0 0 100px rgba(107, 142, 35, 0.6)';
-        });
-        
-        logo.addEventListener('mouseout', function() {
-            this.style.textShadow = '0 0 30px rgba(74, 124, 89, 0.4)';
+        // Mobile menu functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
 
-        // Add scroll effect to header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking on nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Header scroll effects with performance optimization
+        let ticking = false;
+        function updateScrollEffects() {
+            const header = document.getElementById('header');
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
-        });
 
-        // Add parallax effect to image
+            // Update scroll progress
+            const scrollProgress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollIndicator.style.width = Math.max(0, Math.min(100, scrollProgress)) + '%';
+            
+            ticking = false;
+        }
+
         window.addEventListener('scroll', function() {
-            const image = document.querySelector('#footer-image img');
-            if (image) {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.2;
-                image.style.transform = `translateY(${rate}px)`;
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffects);
+                ticking = true;
             }
         });
+
+        // Logo interactive effects (only for desktop)
+        const logo = document.querySelector('h1');
+        if (window.innerWidth > 768) {
+            logo.addEventListener('mouseover', function() {
+                this.style.textShadow = '0 0 50px rgba(74, 124, 89, 0.8), 0 0 100px rgba(107, 142, 35, 0.6)';
+            });
+            
+            logo.addEventListener('mouseout', function() {
+                this.style.textShadow = '0 0 30px rgba(74, 124, 89, 0.4)';
+            });
+        }
+
+        // Optimized parallax effect
+        let parallaxTicking = false;
+        function updateParallax() {
+            const image = document.querySelector('#footer-image img');
+            if (image && window.innerWidth > 768) {
+                const rect = image.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (isVisible) {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * -0.1;
+                    image.style.transform = `translateY(${rate}px)`;
+                }
+            }
+            parallaxTicking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!parallaxTicking) {
+                requestAnimationFrame(updateParallax);
+                parallaxTicking = true;
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const aboutContainer = document.querySelector('.about-container');
+            const footerImage = document.querySelector('#footer-image');
+            
+            if (aboutContainer) observer.observe(aboutContainer);
+            if (footerImage) observer.observe(footerImage);
+        });
+
+        // Prevent zoom on input focus (iOS Safari)
+        if (navigator.userAgent.match(/iPhone|iPad|iPod/)) {
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+                viewport.setAttribute('content', viewport.getAttribute('content') + ', user-scalable=no');
+            }
+        }
+
+        // Handle orientation change
+        window.addEventListener('orientationchange', function() {
+            setTimeout(function() {
+                window.scrollTo(0, window.scrollY);
+            }, 100);
+        });
+
+        // Preload images for better performance
+        const preloadImage = new Image();
+        preloadImage.src = 'img/24.jpg';
     </script>
 </body>
 </html>
